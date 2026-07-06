@@ -122,6 +122,7 @@
     "@turbopuffer/turbopuffer": "^2.0.0",
     "@types/jest": "29.5.14",
     "@types/pg": "8.11.0",
+    "@upstash/vector": "^1.2.3",
     "better-sqlite3": "^12.6.2",
     "cassandra-driver": "4.8.0",
     "cloudflare": "^4.2.0",

@@ -20,6 +20,7 @@ const external = [
   "@google-cloud/aiplatform",
   "@mistralai/mistralai",
   "@supabase/supabase-js",
+  "@upstash/vector",
   "@azure/search-documents",
   "@azure/identity",
   "cloudflare",

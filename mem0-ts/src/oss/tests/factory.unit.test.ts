@@ -158,6 +158,11 @@ jest.mock("../src/vector_stores/pgvector", () => ({
     .fn()
     .mockImplementation((config) => ({ type: "pgvector", config })),
 }));
+jest.mock("../src/vector_stores/upstash_vector", () => ({
+  UpstashVector: jest
+    .fn()
+    .mockImplementation((config) => ({ type: "upstash-vector", config })),
+}));
 jest.mock("../src/vector_stores/azure_mysql", () => ({
   AzureMySQLDB: jest
     .fn()
@@ -299,6 +304,7 @@ describe("VectorStoreFactory", () => {
     ["vectorize"],
     ["azure-ai-search"],
     ["pgvector"],
+    ["upstash_vector"],
     ["azure_mysql"],
     ["cassandra"],
     ["s3-vectors"],
