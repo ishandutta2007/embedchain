@@ -158,6 +158,11 @@ jest.mock("../src/vector_stores/pgvector", () => ({
     .fn()
     .mockImplementation((config) => ({ type: "pgvector", config })),
 }));
+jest.mock("../src/vector_stores/cassandra", () => ({
+  CassandraDB: jest
+    .fn()
+    .mockImplementation((config) => ({ type: "cassandra", config })),
+}));
 jest.mock("../src/vector_stores/s3_vectors", () => ({
   S3Vectors: jest
     .fn()
@@ -289,6 +294,7 @@ describe("VectorStoreFactory", () => {
     ["vectorize"],
     ["azure-ai-search"],
     ["pgvector"],
+    ["cassandra"],
     ["s3-vectors"],
     ["s3_vectors"],
   ])("creates vector store for provider '%s'", (provider) => {
