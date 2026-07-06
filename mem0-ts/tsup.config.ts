@@ -28,6 +28,7 @@ const external = [
   "fastembed",
   "compromise",
   "natural",
+  "mysql2",
   "@turbopuffer/turbopuffer",
 ];
 
