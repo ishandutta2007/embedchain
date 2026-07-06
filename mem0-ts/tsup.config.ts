@@ -28,6 +28,7 @@ const external = [
   "fastembed",
   "compromise",
   "natural",
+  "@turbopuffer/turbopuffer",
 ];
 
 const define = {
