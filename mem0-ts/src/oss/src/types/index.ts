@@ -45,6 +45,8 @@ export interface HistoryStoreConfig {
 export interface LLMConfig {
   provider?: string;
   baseURL?: string;
+  vllmBaseURL?: string;
+  vllm_base_url?: string;
   url?: string;
   config?: Record<string, any>;
   apiKey?: string;
@@ -135,6 +137,8 @@ export const MemoryConfigSchema = z.object({
       model: z.union([z.string(), z.any()]).optional(),
       modelProperties: z.record(z.string(), z.any()).optional(),
       baseURL: z.string().optional(),
+      vllmBaseURL: z.string().optional(),
+      vllm_base_url: z.string().optional(),
       url: z.string().optional(),
       timeout: z.number().optional(),
       temperature: z.number().optional(),
