@@ -9,6 +9,7 @@ export * from "./embeddings/together";
 export * from "./embeddings/google";
 export * from "./embeddings/azure";
 export * from "./embeddings/langchain";
+export * from "./embeddings/fastembed";
 export * from "./llms/base";
 export * from "./llms/openai";
 export * from "./llms/google";
