@@ -27,6 +27,7 @@ import { DeepSeekLLM } from "../llms/deepseek";
 import { XAILLM } from "../llms/xai";
 import { LiteLLM } from "../llms/litellm";
 import { MiniMaxLLM } from "../llms/minimax";
+import { TogetherLLM } from "../llms/together";
 import { VllmLLM } from "../llms/vllm";
 import { SupabaseDB } from "../vector_stores/supabase";
 import { SQLiteManager } from "../storage/SQLiteManager";
@@ -112,6 +113,8 @@ export class LLMFactory {
         return new LiteLLM(config);
       case "minimax":
         return new MiniMaxLLM(config);
+      case "together":
+        return new TogetherLLM(config);
       case "vllm":
         return new VllmLLM(config);
       default:
