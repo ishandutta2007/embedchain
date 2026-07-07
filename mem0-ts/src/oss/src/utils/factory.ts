@@ -24,6 +24,7 @@ import { ValkeyDB } from "../vector_stores/valkey";
 import { OllamaLLM } from "../llms/ollama";
 import { LMStudioLLM } from "../llms/lmstudio";
 import { DeepSeekLLM } from "../llms/deepseek";
+import { XAILLM } from "../llms/xai";
 import { LiteLLM } from "../llms/litellm";
 import { MiniMaxLLM } from "../llms/minimax";
 import { VllmLLM } from "../llms/vllm";
@@ -102,6 +103,8 @@ export class LLMFactory {
         return new LangchainLLM(config);
       case "deepseek":
         return new DeepSeekLLM(config);
+      case "xai":
+        return new XAILLM(config);
       case "litellm":
         return new LiteLLM(config);
       case "minimax":
