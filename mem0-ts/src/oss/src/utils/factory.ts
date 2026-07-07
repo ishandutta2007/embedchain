@@ -52,6 +52,7 @@ import { CassandraDB } from "../vector_stores/cassandra";
 import { PineconeDB } from "../vector_stores/pinecone";
 import { S3Vectors } from "../vector_stores/s3_vectors";
 import { TurbopufferDB } from "../vector_stores/turbopuffer";
+import { MongoDB } from "../vector_stores/mongodb";
 
 export class EmbedderFactory {
   static create(provider: string, config: EmbeddingConfig): Embedder {
@@ -159,6 +160,8 @@ export class VectorStoreFactory {
         return new S3Vectors(config as any);
       case "turbopuffer":
         return new TurbopufferDB(config as any);
+      case "mongodb":
+        return new MongoDB(config as any);
       default:
         throw new Error(`Unsupported vector store provider: ${provider}`);
     }
