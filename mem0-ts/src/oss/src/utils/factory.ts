@@ -58,6 +58,7 @@ import { S3Vectors } from "../vector_stores/s3_vectors";
 import { TurbopufferDB } from "../vector_stores/turbopuffer";
 import { Milvus } from "../vector_stores/milvus";
 import { MongoDB } from "../vector_stores/mongodb";
+import { WeaviateDB } from "../vector_stores/weaviate";
 
 export class EmbedderFactory {
   static create(provider: string, config: EmbeddingConfig): Embedder {
@@ -177,6 +178,8 @@ export class VectorStoreFactory {
         return new Milvus(config as any);
       case "mongodb":
         return new MongoDB(config as any);
+      case "weaviate":
+        return new WeaviateDB(config as any);
       default:
         throw new Error(`Unsupported vector store provider: ${provider}`);
     }
