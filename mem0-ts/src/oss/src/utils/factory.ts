@@ -25,6 +25,7 @@ import { OllamaLLM } from "../llms/ollama";
 import { LMStudioLLM } from "../llms/lmstudio";
 import { DeepSeekLLM } from "../llms/deepseek";
 import { XAILLM } from "../llms/xai";
+import { SarvamLLM } from "../llms/sarvam";
 import { LiteLLM } from "../llms/litellm";
 import { MiniMaxLLM } from "../llms/minimax";
 import { TogetherLLM } from "../llms/together";
@@ -109,6 +110,8 @@ export class LLMFactory {
         return new DeepSeekLLM(config);
       case "xai":
         return new XAILLM(config);
+      case "sarvam":
+        return new SarvamLLM(config);
       case "litellm":
         return new LiteLLM(config);
       case "minimax":
