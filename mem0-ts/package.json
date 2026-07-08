@@ -138,10 +138,14 @@
     "iovalkey": "^0.3.3",
     "compromise": "^14.0.0",
     "natural": "^8.0.1",
-    "mysql2": "^3.0.0"
+    "mysql2": "^3.0.0",
+    "@zilliz/milvus2-sdk-node": "^2.4.0 || ^3.0.0"
   },
   "peerDependenciesMeta": {
     "mysql2": {
+      "optional": true
+    },
+    "@zilliz/milvus2-sdk-node": {
       "optional": true
     }
   },
