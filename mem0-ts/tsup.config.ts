@@ -5,6 +5,7 @@ const external = [
   "openai",
   "@anthropic-ai/sdk",
   "@aws-sdk/client-s3vectors",
+  "@mochow/mochow-sdk-node",
   "groq-sdk",
   "cohere-ai",
   "@huggingface/transformers",

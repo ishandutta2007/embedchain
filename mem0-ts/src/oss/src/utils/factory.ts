@@ -23,6 +23,7 @@ import { CrossEncoderReranker } from "../rerankers/cross_encoder";
 import { Embedder } from "../embeddings/base";
 import { LLM } from "../llms/base";
 import { VectorStore } from "../vector_stores/base";
+import { BaiduDB } from "../vector_stores/baidu";
 import { Qdrant } from "../vector_stores/qdrant";
 import { ChromaDB } from "../vector_stores/chroma";
 import { VectorizeDB } from "../vector_stores/vectorize";
@@ -143,6 +144,8 @@ export class VectorStoreFactory {
     switch (provider.toLowerCase()) {
       case "memory":
         return new MemoryVectorStore(config);
+      case "baidu":
+        return new BaiduDB(config as any);
       case "qdrant":
         return new Qdrant(config as any);
       case "chroma":

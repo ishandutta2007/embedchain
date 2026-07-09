@@ -109,7 +109,7 @@ importers:
         version: 4.5.0
       cohere-ai:
         specifier: ^7.17.0 || ^8.0.0
-        version: 8.0.0(@aws-crypto/sha256-js@5.2.0)(@smithy/protocol-http@5.5.2)(@smithy/signature-v4@5.5.2)
+        version: 8.0.0(@aws-crypto/sha256-js@5.2.0)(@smithy/protocol-http@5.5.2)(@smithy/signature-v4@5.6.2)
       compromise:
         specifier: ^14.0.0
         version: 14.15.1
@@ -153,6 +153,9 @@ importers:
         specifier: ^3.24.1
         version: 3.25.76
     devDependencies:
+      '@mochow/mochow-sdk-node':
+        specifier: ^2.1.5
+        version: 2.1.5
       '@types/better-sqlite3':
         specifier: ^7.6.13
         version: 7.6.13
@@ -191,7 +194,7 @@ importers:
         version: 10.9.2(@types/node@22.19.21)(typescript@5.5.4)
       tsup:
         specifier: ^8.3.0
-        version: 8.5.1(typescript@5.5.4)
+        version: 8.5.1(tsx@4.23.0)(typescript@5.5.4)
       typescript:
         specifier: 5.5.4
         version: 5.5.4
@@ -1136,6 +1139,9 @@ packages:
 
   '@mistralai/mistralai@1.15.1':
     resolution: {integrity: sha512-fb995eiz3r0KsBGtRjFV+/iLbX+UpfalxpF+YitT3R6ukrPD4PN+FGwwmYcRFhNAzVzDUtTVxQYnjQWEnwV5nw==}
+
+  '@mochow/mochow-sdk-node@2.1.5':
+    resolution: {integrity: sha512-IYluqAf50wH51uMGDqRni1Mmuc8GCNDHibJf0x3YlJFQkTJkU+l/PvLsmrer9qV1gMj6wHA+LE0OkNevW7KsCw==}
 
   '@mongodb-js/saslprep@1.4.11':
     resolution: {integrity: sha512-o9rAHc0IpIjuPSxRutWpE1F62x7n+4mVS4rCNHkzhIUMQcc18bb6xEq5wd2NdN0WjepIyXIppRshYI2kQDOZVA==}
@@ -4076,6 +4082,11 @@ packages:
       typescript:
         optional: true
 
+  tsx@4.23.0:
+    resolution: {integrity: sha512-eUdUIaCr963q2h5u3+QwvYp0+eqPvn+egeqZUm0hwERCqqx1E3kK5ehbGCvqSE5MQAULr67ww0cA3jKc3YkM1w==}
+    engines: {node: '>=18.0.0'}
+    hasBin: true
+
   tunnel-agent@0.6.0:
     resolution: {integrity: sha512-McnNiV1l8RYeY8tBgEpuodCC1mLUdbSN+CYBL7kJsJNInOP8UjDDEwdk6Mw60vdLLrr5NHKZhMAOSrR2NZuQ+w==}
 
@@ -5700,6 +5711,11 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
+  '@mochow/mochow-sdk-node@2.1.5':
+    dependencies:
+      tsx: 4.23.0
+      winston: 3.19.0
+
   '@mongodb-js/saslprep@1.4.11':
     dependencies:
       sparse-bitfield: 3.0.3
@@ -6666,7 +6682,7 @@ snapshots:
 
   co@4.6.0: {}
 
-  cohere-ai@8.0.0(@aws-crypto/sha256-js@5.2.0)(@smithy/protocol-http@5.5.2)(@smithy/signature-v4@5.5.2):
+  cohere-ai@8.0.0(@aws-crypto/sha256-js@5.2.0)(@smithy/protocol-http@5.5.2)(@smithy/signature-v4@5.6.2):
     dependencies:
       convict: 6.2.5
       form-data: 4.0.6
@@ -6676,7 +6692,7 @@ snapshots:
     optionalDependencies:
       '@aws-crypto/sha256-js': 5.2.0
       '@smithy/protocol-http': 5.5.2
-      '@smithy/signature-v4': 5.5.2
+      '@smithy/signature-v4': 5.6.2
 
   collect-v8-coverage@1.0.3: {}
 
@@ -8330,9 +8346,11 @@ snapshots:
 
   platform@1.3.6: {}
 
-  postcss-load-config@6.0.1:
+  postcss-load-config@6.0.1(tsx@4.23.0):
     dependencies:
       lilconfig: 3.1.3
+    optionalDependencies:
+      tsx: 4.23.0
 
   postgres-array@2.0.0: {}
 
@@ -8895,7 +8913,7 @@ snapshots:
 
   tslib@2.8.1: {}
 
-  tsup@8.5.1(typescript@5.5.4):
+  tsup@8.5.1(tsx@4.23.0)(typescript@5.5.4):
     dependencies:
       bundle-require: 5.1.0(esbuild@0.28.1)
       cac: 6.7.14
@@ -8906,7 +8924,7 @@ snapshots:
       fix-dts-default-cjs-exports: 1.0.1
       joycon: 3.1.1
       picocolors: 1.1.1
-      postcss-load-config: 6.0.1
+      postcss-load-config: 6.0.1(tsx@4.23.0)
       resolve-from: 5.0.0
       rollup: 4.61.1
       source-map: 0.7.6
@@ -8921,6 +8939,12 @@ snapshots:
       - supports-color
       - tsx
       - yaml
+
+  tsx@4.23.0:
+    dependencies:
+      esbuild: 0.28.1
+    optionalDependencies:
+      fsevents: 2.3.3
 
   tunnel-agent@0.6.0:
     dependencies:
