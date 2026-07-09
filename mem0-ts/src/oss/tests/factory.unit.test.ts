@@ -40,6 +40,11 @@ jest.mock("../src/embeddings/lmstudio", () => ({
     .fn()
     .mockImplementation((config) => ({ type: "lmstudio-embedder", config })),
 }));
+jest.mock("../src/embeddings/vertexai", () => ({
+  VertexAIEmbedder: jest
+    .fn()
+    .mockImplementation((config) => ({ type: "vertexai-embedder", config })),
+}));
 jest.mock("../src/embeddings/together", () => ({
   TogetherEmbedder: jest
     .fn()
@@ -241,6 +246,7 @@ describe("EmbedderFactory", () => {
     ["fastembed"],
     ["langchain"],
     ["lmstudio"],
+    ["vertexai"],
     ["together"],
   ])("creates embedder for provider '%s'", (provider) => {
     expect(() =>

@@ -408,7 +408,7 @@ export class Memory {
           }
           let vec: number[];
           try {
-            vec = await this.embedder.embed(entityText);
+            vec = await this.embedder.embed(entityText, "update");
           } catch (e) {
             console.debug(`Entity re-embed failed for '${entityText}': ${e}`);
             continue;
@@ -452,7 +452,7 @@ export class Memory {
         try {
           let entityVec: number[];
           try {
-            entityVec = await this.embedder.embed(entity.text);
+            entityVec = await this.embedder.embed(entity.text, "add");
           } catch (e) {
             console.debug(`Entity embed failed for '${entity.text}': ${e}`);
             continue;
@@ -827,7 +827,7 @@ export class Memory {
       .join("\n");
 
     // Phase 1: Existing memory retrieval
-    const queryEmbedding = await this.embedder.embed(parsedMessages);
+    const queryEmbedding = await this.embedder.embed(parsedMessages, "search");
     const existingResults = await this.vectorStore.search(
       queryEmbedding,
       10,
@@ -921,7 +921,7 @@ export class Memory {
       .filter((t) => t.length > 0);
     let embedMap: Record<string, number[]> = {};
     try {
-      const memEmbeddingsList = await this.embedder.embedBatch(memTexts);
+      const memEmbeddingsList = await this.embedder.embedBatch(memTexts, "add");
       for (let i = 0; i < memTexts.length; i++) {
         embedMap[memTexts[i]] = memEmbeddingsList[i];
       }
@@ -929,7 +929,7 @@ export class Memory {
       // Fallback: embed individually
       for (const text of memTexts) {
         try {
-          embedMap[text] = await this.embedder.embed(text);
+          embedMap[text] = await this.embedder.embed(text, "add");
         } catch (e) {
           console.warn(`Failed to embed memory text: ${e}`);
         }
@@ -1107,13 +1107,13 @@ export class Memory {
         // 7b: Single batch embed for all unique entities
         let entityEmbeddings: (number[] | null)[];
         try {
-          entityEmbeddings = await this.embedder.embedBatch(entityTexts);
+          entityEmbeddings = await this.embedder.embedBatch(entityTexts, "add");
         } catch {
           // Fallback: embed individually
           entityEmbeddings = [];
           for (const t of entityTexts) {
             try {
-              entityEmbeddings.push(await this.embedder.embed(t));
+              entityEmbeddings.push(await this.embedder.embed(t, "add"));
             } catch {
               entityEmbeddings.push(null);
             }
@@ -1377,7 +1377,7 @@ export class Memory {
     const queryEntities = extractEntities(query);
 
     // Step 2: Embed query
-    const queryEmbedding = await this.embedder.embed(query);
+    const queryEmbedding = await this.embedder.embed(query, "search");
 
     // Step 3: Semantic search (over-fetch for scoring pool)
     const internalLimit = Math.max(topK * 4, 60);
@@ -1442,7 +1442,10 @@ export class Memory {
               entitySearchFilters[k] = effectiveFilters[k];
           }
           const entityTexts = deduped.map((e) => e.text);
-          const embeddings = await this.embedder.embedBatch(entityTexts);
+          const embeddings = await this.embedder.embedBatch(
+            entityTexts,
+            "search",
+          );
 
           if (embeddings.length !== entityTexts.length) {
             console.warn(
@@ -1648,7 +1651,7 @@ export class Memory {
 
     const existingEmbeddings: Record<string, number[]> = {};
     if (text != null) {
-      existingEmbeddings[text] = await this.embedder.embed(text);
+      existingEmbeddings[text] = await this.embedder.embed(text, "update");
     }
 
     await this.updateMemory(memoryId, text, existingEmbeddings, updateMetadata);
@@ -1873,7 +1876,7 @@ export class Memory {
   ): Promise<string> {
     const memoryId = uuidv4();
     const embedding =
-      existingEmbeddings[data] || (await this.embedder.embed(data));
+      existingEmbeddings[data] || (await this.embedder.embed(data, "add"));
 
     const memoryMetadata = {
       ...metadata,
@@ -1917,7 +1920,8 @@ export class Memory {
     const textChanged = newData !== prevValue;
 
     const embedding =
-      existingEmbeddings[newData] || (await this.embedder.embed(newData));
+      existingEmbeddings[newData] ||
+      (await this.embedder.embed(newData, "update"));
 
     const newMetadata = {
       ...existingMemory.payload,

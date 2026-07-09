@@ -54,6 +54,7 @@ import { HuggingFaceEmbedder } from "../embeddings/huggingface";
 import { LangchainVectorStore } from "../vector_stores/langchain";
 import { AzureAISearch } from "../vector_stores/azure_ai_search";
 import { PGVector } from "../vector_stores/pgvector";
+import { VertexAIEmbedder } from "../embeddings/vertexai";
 import { ElasticsearchDB } from "../vector_stores/elasticsearch";
 import { OpenSearchDB } from "../vector_stores/opensearch";
 import { UpstashVector } from "../vector_stores/upstash_vector";
@@ -87,6 +88,8 @@ export class EmbedderFactory {
         return new FastEmbedEmbedder(config);
       case "langchain":
         return new LangchainEmbedder(config);
+      case "vertexai":
+        return new VertexAIEmbedder(config);
       case "huggingface":
         return new HuggingFaceEmbedder(config);
       default:
