@@ -79,7 +79,18 @@ import { logger } from "../utils/logger";
 import { normalizeExpirationDate, payloadIsExpired } from "../utils/expiration";
 import { getOrCreateMem0UserId } from "../../../client/config";
 
-// Entity params that must be passed via filters - check both snake_case and camelCase
+export class LLMError extends Error {
+  readonly cause?: unknown;
+
+  constructor(message: string, options: { cause?: unknown } = {}) {
+    super(message);
+    this.name = "LLMError";
+    this.cause = options.cause;
+    Object.setPrototypeOf(this, new.target.prototype);
+  }
+}
+
+// Entity params that must be passed via filters check both snake_case and camelCase
 const ENTITY_PARAMS = [
   "user_id",
   "agent_id",
@@ -871,7 +882,7 @@ export class Memory {
       )) as string;
     } catch (e) {
       console.error("LLM extraction failed:", e);
-      return [];
+      throw new LLMError(`LLM extraction failed: ${e}`, { cause: e });
     }
 
     // Parse response
