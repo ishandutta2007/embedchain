@@ -55,6 +55,7 @@ import { HuggingFaceEmbedder } from "../embeddings/huggingface";
 import { LangchainVectorStore } from "../vector_stores/langchain";
 import { AzureAISearch } from "../vector_stores/azure_ai_search";
 import { PGVector } from "../vector_stores/pgvector";
+import { NeptuneAnalyticsVectorStore } from "../vector_stores/neptune_analytics";
 import { VertexAIEmbedder } from "../embeddings/vertexai";
 import { ElasticsearchDB } from "../vector_stores/elasticsearch";
 import { OpenSearchDB } from "../vector_stores/opensearch";
@@ -172,6 +173,9 @@ export class VectorStoreFactory {
         return new VertexAIVectorSearch(config as any);
       case "pgvector":
         return new PGVector(config as any);
+      case "neptune":
+      case "neptune-analytics":
+        return new NeptuneAnalyticsVectorStore(config as any);
       case "elasticsearch":
         return new ElasticsearchDB(config as any);
       case "opensearch":
